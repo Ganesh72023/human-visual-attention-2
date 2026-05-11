@@ -1,16 +1,9 @@
 streamlit
-opencv-python==4.9.0.80
 opencv-contrib-python==4.9.0.80
 mediapipe==0.10.14
 deepface
-tensorflow==2.15.1
-tensorflow-intel==2.15.1; platform_system == "Windows"
+tensorflow-cpu==2.15.1
 numpy==1.26.4
-keras==2.15.0
-ml-dtypes==0.3.2
-wrapt==1.14.2
-jax==0.4.28
-jaxlib==0.4.28
 pandas
 plotly
 Pillow
