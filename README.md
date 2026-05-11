@@ -19,13 +19,14 @@ Detects one primary face with MediaPipe, renders facial landmarks, estimates emo
 ```bash
 git clone https://github.com/<username>/<repo>.git
 cd "c:\human visual attention"
-python -m venv .venv
+py -3.10 -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
-> On macOS/Linux, activate the venv with `source .venv/bin/activate`.
+> On macOS/Linux, create the venv with Python 3.10 and activate it with `source .venv/bin/activate`.
 
 DeepFace may download pretrained model weights during first use. No model training is performed.
 
