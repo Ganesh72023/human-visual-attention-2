@@ -37,7 +37,15 @@ def analyze_emotion(image_bgr: np.ndarray) -> dict[str, Any]:
 
     try:
         from deepface import DeepFace
+    except ImportError:
+        return {
+            "success": False,
+            "error": "DeepFace is not installed, emotion analysis unavailable.",
+            "dominant_emotion": "unknown",
+            "emotions": _empty_emotions(),
+        }
 
+    try:
         result = DeepFace.analyze(
             img_path=image_bgr,
             actions=["emotion"],
