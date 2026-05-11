@@ -1,7 +1,7 @@
 streamlit
-opencv-python==4.8.0.76
+opencv-python==4.9.0.80
 mediapipe
-numpy
+numpy==1.26.4
 pandas
 plotly
 Pillow
