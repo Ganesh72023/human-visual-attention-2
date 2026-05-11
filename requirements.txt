@@ -1,9 +1,9 @@
 streamlit
 opencv-python==4.8.0.76
-mediapipe==0.10.14
+mediapipe==0.10.30
 tensorflow-cpu==2.12.0
 numpy==1.24.3
 pandas
 plotly
 Pillow
-protobuf==3.20.3
+protobuf==4.21.12
