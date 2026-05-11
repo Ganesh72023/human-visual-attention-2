@@ -4,4 +4,4 @@ numpy==1.26.4
 pandas
 plotly
 Pillow
-protobuf==4.21.12
+protobuf==5.27.0
