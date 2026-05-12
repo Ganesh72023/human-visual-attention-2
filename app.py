@@ -75,11 +75,11 @@ def render_image_analysis(image_bgr: np.ndarray, min_confidence: float, max_widt
     face_col, mesh_col = st.columns(2)
     with face_col:
         panel_title("Face Detection", "Highest-confidence MediaPipe face.")
-        st.image(bgr_to_rgb(detection.annotated_image), use_container_width=True)
+        st.image(bgr_to_rgb(detection.annotated_image), width='stretch')
         metric_card("Detection Confidence", f"{detection.confidence * 100:.1f}%", "Single primary face analyzed")
     with mesh_col:
         panel_title("Facial Landmark Mesh", "Eyes, face contours, and iris geometry.")
-        st.image(bgr_to_rgb(mesh.annotated_image), use_container_width=True)
+        st.image(bgr_to_rgb(mesh.annotated_image), width='stretch')
         metric_card("Landmark Status", "Active" if not mesh.no_face else "Unavailable", "Face Mesh refined landmarks")
 
     if not emotion["success"]:
@@ -92,10 +92,10 @@ def render_image_analysis(image_bgr: np.ndarray, min_confidence: float, max_widt
     chart_col, gauge_col = st.columns(2)
     with chart_col:
         panel_title("Emotion Analysis", "DeepFace pretrained emotion probabilities.")
-        st.plotly_chart(emotion_bar_chart(emotions), use_container_width=True)
+        st.plotly_chart(emotion_bar_chart(emotions), width='stretch')
     with gauge_col:
         panel_title("Attention Score", "Explainable face and eye geometry estimate.")
-        st.plotly_chart(attention_gauge(attention["attention_score"]), use_container_width=True)
+        st.plotly_chart(attention_gauge(attention["attention_score"]), width='stretch')
 
     metric_col1, metric_col2, metric_col3 = st.columns(3)
     with metric_col1:
@@ -106,7 +106,7 @@ def render_image_analysis(image_bgr: np.ndarray, min_confidence: float, max_widt
         metric_card("Orientation", attention["orientation"], "Head and gaze geometry")
 
     with st.expander("Attention contributing factors", expanded=True):
-        st.dataframe(attention["factors"], use_container_width=True)
+        st.dataframe(attention["factors"], width='stretch')
 
     panel_title("Cognitive Interpretation")
     st.markdown(
@@ -146,7 +146,7 @@ def render_video_analysis(uploaded_file, frame_step: int, max_frames: int, max_w
     status_box("ok", "Video sampled successfully. Results summarize detected face frames only.")
     if summary.get("representative_frame") is not None:
         panel_title("Representative Annotated Frame")
-        st.image(bgr_to_rgb(summary["representative_frame"]), use_container_width=True)
+        st.image(bgr_to_rgb(summary["representative_frame"]), width='stretch')
 
     top1, top2, top3 = st.columns(3)
     with top1:
@@ -159,13 +159,13 @@ def render_video_analysis(uploaded_file, frame_step: int, max_frames: int, max_w
     chart_col, gauge_col = st.columns(2)
     with chart_col:
         panel_title("Aggregated Emotion", "Average DeepFace confidence across sampled frames.")
-        st.plotly_chart(emotion_bar_chart(summary["emotions"]), use_container_width=True)
+        st.plotly_chart(emotion_bar_chart(summary["emotions"]), width='stretch')
     with gauge_col:
         panel_title("Video Attention Gauge", "Mean attention estimate across detected frames.")
-        st.plotly_chart(attention_gauge(summary["average_attention"]), use_container_width=True)
+        st.plotly_chart(attention_gauge(summary["average_attention"]), width='stretch')
 
     panel_title("Video Processing Summary")
-    st.plotly_chart(video_summary_chart(summary), use_container_width=True)
+    st.plotly_chart(video_summary_chart(summary), width='stretch')
 
     dominant_confidence = float(summary["emotions"].get(summary["dominant_emotion"], 0.0))
     st.markdown(
@@ -237,7 +237,7 @@ def main() -> None:
             if image_bgr is None:
                 status_box("error", "Corrupted image or unsupported image payload.")
                 return
-            st.image(bgr_to_rgb(resize_for_processing(image_bgr, max_width=max_width)), use_container_width=True)
+            st.image(bgr_to_rgb(resize_for_processing(image_bgr, max_width=max_width)), width='stretch')
         else:
             st.video(uploaded_file)
     with status_col:
@@ -246,7 +246,7 @@ def main() -> None:
         metric_card("Processing Width", f"{max_width}px", "Resize limit for speed")
 
     st.markdown("<div class='analysis-action'>", unsafe_allow_html=True)
-    analyze_now = st.button("Analyze uploaded media", type="primary", use_container_width=True)
+    analyze_now = st.button("Analyze uploaded media", type="primary", width='stretch')
     st.markdown("</div>", unsafe_allow_html=True)
     if not analyze_now:
         workflow_steps(active=3)
